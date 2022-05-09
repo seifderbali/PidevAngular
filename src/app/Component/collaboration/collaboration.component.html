@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Dorne - Directory &amp; Listing Template | Contact</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/img/core-img/favicon.ico">
+
+  <!-- Core Stylesheet -->
+
+  <!-- Responsive CSS -->
+
+</head>
+<div class = "text-center">
+
+  <h1>List of Collaborations</h1>
+
+
+</div>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Mail</th>
+        <th scope="col">Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let v of collaborations">
+        <td>{{ v.id }}</td>
+        <td>{{ v.nom }}</td>
+        <td>{{ v.mail }}</td>
+        <td>{{ v.date }}</td>
+        <td><button (click)="deletecollab(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
+        <td><button routerLink="/collaboration" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
+        <td><button [routerLink]="['/offre',v.id]" type="button" class="btn btn-primary">Show</button></td>
+
+
+      </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+<div class = "text-center">
+  <h1>Add New Collaboration</h1>
+</div>
+
+
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #voyageForm="ngForm">
+      <div class="form-group">
+        <label for="nom">Name</label>
+        <input type="text" [(ngModel)]="collaboration.nom" class="form-control" id="nom" name="nom" placeholder="Entrer le nom"
+               required #name="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="mail">Mail</label>
+        <input type="text" [(ngModel)]="collaboration.mail"
+               class="form-control"
+               id="mail"
+               name="mail"
+               placeholder="Entrer le mail "
+               required #email="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" [(ngModel)]="collaboration.date"
+               class="form-control"
+               id="date"
+               name="date"
+               placeholder="Entrer le date "
+               required #email="ngModel">
+      </div>
+
+
+      <button type="submit" [disabled]="!voyageForm.form.valid"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Forum</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateCollab()">
+          <div class="form-group">
+            <label for="nomm">contenu :</label>
+            <input type="text" #address [(ngModel)]="collaboration.nom" name="nom" id="nomm"
+                   class="form-control" placeholder="nom">
+          </div>
+          <div class="form-group">
+            <label for="maill">Mail :</label>
+            <input type="text" #address [(ngModel)]="collaboration.mail" name="mail" id="maill"
+                   class="form-control" placeholder="mail">
+          </div>
+          <div class="form-group">
+            <label for="datee">date :</label>
+            <input type="text" #name [(ngModel)]="collaboration.date" name="date" id="datee" class="form-control"
+                   placeholder="datee">
+          </div>
+
+
+          <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary w-100">
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+

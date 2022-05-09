@@ -1,5 +1,5 @@
 {
-  "name": "pidev-angular",
+  "name": "pidev-crud",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

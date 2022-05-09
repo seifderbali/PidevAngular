@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Dorne - Directory &amp; Listing Template | Contact</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/img/core-img/favicon.ico">
+
+  <!-- Core Stylesheet -->
+
+  <!-- Responsive CSS -->
+
+</head>
+<div class = "text-center">
+
+  <h1>List of Offers</h1>
+
+
+</div>
+
+
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Contenu</th>
+        <th scope="col">Date</th>
+        <th scope="col">UserID</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let v of offres">
+        <td>{{ v.id }}</td>
+        <td>{{ v.nom }}</td>
+        <td>{{ v.description }}</td>
+        <td>{{ v.startDate }}</td>
+        <td>{{ v.endtDate }}</td>
+        <td>{{ v.phone }}</td>
+
+
+        <td><button (click)="deleteOffre(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
+        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
+
+      </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<td><button (click)="avOffre()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModala">Available Offres</button></td>
+
+<div class = "text-center">
+  <h1>Add New Offre</h1>
+</div>
+
+
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #voyageForm="ngForm">
+      <div class="form-group">
+        <label for="nom">nom</label>
+        <input type="text" [(ngModel)]="offre.nom" class="form-control" id="nom" name="nom" placeholder="Entrer le nom"
+               required #name="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="description">Date</label>
+        <input type="text" [(ngModel)]="offre.description"
+               class="form-control"
+               id="description"
+               name="description"
+               placeholder="Entrer le description "
+               required #email="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="dates">Start Date</label>
+        <input type="date" [(ngModel)]="offre.startDate"
+               class="form-control"
+               id="dates"
+               name="dates"
+               placeholder="Entrer the start date "
+               required #email="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="datee">Date</label>
+        <input type="date" [(ngModel)]="offre.endtDate"
+               class="form-control"
+               id="datee"
+               name="datee"
+               placeholder="Entrer the end date "
+               required #email="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="phone">UserID</label>
+        <input type="text" [(ngModel)]="offre.phone"
+               class="form-control"
+               id="phone"
+               name="phone"
+               placeholder="Entrer phone"
+               required #email="ngModel">
+      </div>
+
+      <button [routerLink]="['/offre',this.id]" type="submit" [disabled]="!voyageForm.form.valid"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Offre</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateOffre()">
+          <div class="form-group">
+            <label for="nomm">Name :</label>
+            <input type="text" #address [(ngModel)]="offre.nom" name="nom" id="nomm"
+                   class="form-control" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="descriptionu">Date</label>
+            <input type="text" [(ngModel)]="offre.description"
+                   class="form-control"
+                   id="descriptionu"
+                   name="description"
+                   placeholder="Entrer le description "
+                   required #email="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="datesu">Start Date</label>
+            <input type="date" [(ngModel)]="offre.startDate"
+                   class="form-control"
+                   id="datesu"
+                   name="dates"
+                   placeholder="Entrer the start date "
+                   required #email="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="dateeu">Date</label>
+            <input type="date" [(ngModel)]="offre.endtDate"
+                   class="form-control"
+                   id="dateeu"
+                   name="datee"
+                   placeholder="Entrer the end date "
+                   required #email="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="phoneu">UserID</label>
+            <input type="text" [(ngModel)]="offre.phone"
+                   class="form-control"
+                   id="phoneu"
+                   name="phone"
+                   placeholder="Entrer phone"
+                   required #email="ngModel">
+          </div>
+
+
+          <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary w-100">
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ModalAvailable-->
+<div class="modal fade" id="exampleModala" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabela" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabela">Available Offres</h3>
+        <h5>{{ this.ch }}</h5>
+
+      </div>
+    </div>
+  </div>
+</div>
+

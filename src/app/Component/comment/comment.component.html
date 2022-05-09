@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Dorne - Directory &amp; Listing Template | Contact</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/img/core-img/favicon.ico">
+
+  <!-- Core Stylesheet -->
+
+  <!-- Responsive CSS -->
+
+</head>
+<div class = "text-center">
+
+  <h1>List of Comments</h1>
+
+
+</div>
+
+
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Contenu</th>
+        <th scope="col">Date</th>
+        <th scope="col">UserID</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let v of comments">
+        <td>{{ v.id }}</td>
+        <td>{{ v.contenu }}</td>
+        <td>{{ v.date }}</td>
+        <td>{{ v.userid }}</td>
+
+        <td><button (click)="count(v.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" (click)="edit(v)">show</button></td>
+
+        <td><button (click)="deleteComment(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
+        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
+
+      </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalv" (click)="viral()">Viral</button></td>
+
+<div class = "text-center">
+  <h1>Add New Comment</h1>
+</div>
+
+
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #voyageForm="ngForm">
+      <div class="form-group">
+        <label for="contenu">Contenu</label>
+        <input type="text" [(ngModel)]="comment.contenu" class="form-control" id="contenuadd" name="contenuadd" placeholder="Entrer le contenu"
+               required #name="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="Date">Date</label>
+        <input type="date" [(ngModel)]="comment.date"
+               class="form-control"
+               id="dateadd"
+               name="dateadd"
+               placeholder="Entrer le date "
+               required #email="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="userid">UserID</label>
+        <input type="text" [(ngModel)]="comment.userid"
+               class="form-control"
+               id="useridadd"
+               name="useridadd"
+               placeholder="Entrer userid"
+               required #email="ngModel">
+      </div>
+
+      <button type="submit" [disabled]="!voyageForm.form.valid"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Forum</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateComment()">
+          <div class="form-group">
+            <label for="contenu">contenu :</label>
+            <input type="text" #address [(ngModel)]="comment.contenu" name="contenu" id="contenu"
+                   class="form-control" placeholder="contenu">
+          </div>
+          <div class="form-group">
+            <label for="date">date :</label>
+            <input type="text" #name [(ngModel)]="comment.date" name="date" id="date" class="form-control"
+                   placeholder="datee">
+          </div>
+          <div class="form-group">
+            <label for="userid">userid :</label>
+            <input type="text" #address [(ngModel)]="comment.userid" name="userid" id="userid"
+                   class="form-control" placeholder="userid">
+          </div>
+
+          <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary w-100">
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Update Forum</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm2="ngForm">
+
+          <div class="form-group">
+            <h2>Contenus :</h2>
+            <p>{{comment.contenu}}</p>
+          </div>
+          <div class="form-group">
+            <h2>Date :</h2>
+            <p>{{comment.date}}</p>
+          </div>
+          <div class="form-group">
+            <h2>UserID :</h2>
+            <p>{{comment.userid}}</p>
+          </div>
+          <td><button (click)="addlike(1,comment.id)" type="button" class="fa fa-thumbs-up" >Like {{ this.getlike() }}</button></td>
+          <td><button (click)="addlike(-1,comment.id)" type="button" class="fa fa-thumbs-down">Dislike {{ this.getdislike() }}</button></td>
+
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal2 -->
+<div class="modal fade" id="exampleModalv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelv" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabelv">Most Liked Comment</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm2="ngForm">
+
+          <div class="form-group">
+            <h2>Contenus :</h2>
+            <p>{{comment.contenu}}</p>
+          </div>
+          <div class="form-group">
+            <h2>Date :</h2>
+            <p>{{comment.date}}</p>
+          </div>
+          <div class="form-group">
+            <h2>UserID :</h2>
+            <p>{{comment.userid}}</p>
+          </div>
+          <td><button (click)="addlike(1,comment.id)" type="button" class="fa fa-thumbs-up" >Like {{ this.idl }}</button></td>
+          <td><button (click)="addlike(-1,comment.id)" type="button" class="fa fa-thumbs-down">Dislike {{ this.idd }}</button></td>
+
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
