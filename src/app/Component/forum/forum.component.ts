@@ -3,19 +3,28 @@ import {Forum} from "../../Enteties/forum";
 import {ForumService} from "../../Services/forum.service";
 import {Comment} from "../../Enteties/comment";
 import {CommentService} from "../../Services/comment.service";
+import {DatePipe} from "@angular/common";
+
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
   styleUrls: ['./forum.component.css']
+
 })
 export class ForumComponent implements OnInit {
   search:string="";
   userid: number=1;
+  userrole:string="a";
   forum: Forum = new Forum;
   forums: Forum[]=[];
-  fid: number=1;
+  fid: number=13;
   comments: Comment[]=[];
-  constructor(private forumService: ForumService,private commentService: CommentService) { }
+  myDate = new Date();
+  pipe = new DatePipe('en-IST');
+
+  constructor(private forumService: ForumService,private commentService: CommentService) {
+
+  }
 
   ngOnInit(): void {
     this.forumService.findAll(this.userid).subscribe(data => {
@@ -23,6 +32,13 @@ export class ForumComponent implements OnInit {
     });
   }
   onSubmit() {
+      this.myDate=new Date();
+      let ChangedFormat = this.pipe.transform(this.myDate, 'YYYY-dd-MM');
+
+    if (ChangedFormat != null) {
+      this.forum.date = ChangedFormat;
+    }
+    this.forum.userid=this.userid;
     this.forumService.save(this.forum).subscribe(result => this.ngOnInit());
   }
   deleteComment(id:number){
@@ -66,5 +82,7 @@ export class ForumComponent implements OnInit {
     });
 
   }
+
+
 }
 

@@ -3,5 +3,7 @@ export class Collaboration {
   nom!: string;
   mail!: string;
   date!: string;
+  userid!: number;
+
 
 }

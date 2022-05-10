@@ -30,4 +30,8 @@ export class ForumService {
   public findviral(): Observable<Forum> {
     return this.http.get<Forum>(this.baseUrl+"/viral");
   }
+  public find(id:number): Observable<Forum> {
+    return this.http.get<Forum>(this.baseUrl+"/find/"+id);
+  }
+
 }

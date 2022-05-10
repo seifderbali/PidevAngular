@@ -4,7 +4,9 @@ import {CommentService} from "../../Services/comment.service";
 import {Like} from "../../Enteties/like";
 import {LikeService} from "../../Services/like.service";
 import { ActivatedRoute } from '@angular/router';
-import {of} from "rxjs";
+import {DatePipe} from "@angular/common";
+import {Forum} from "../../Enteties/forum";
+import {ForumService} from "../../Services/forum.service";
 
 
 @Component({
@@ -17,14 +19,25 @@ export class CommentComponent implements OnInit {
   idl: Number=0;
   idd: Number=0;
 
+  userid: number=1;
+  userrole:string="a";
+  forum: Forum = new Forum;
 
   like: Like = new Like;
   comment: Comment = new Comment;
   comments: Comment[]=[];
-  constructor(private commentService: CommentService,private likeService: LikeService,private _Activatedroute:ActivatedRoute) {this._Activatedroute.paramMap.subscribe(params => {
+  myDate = new Date();
+  pipe = new DatePipe('en-IST');
+  constructor(private commentService: CommentService,private likeService: LikeService,private _Activatedroute:ActivatedRoute,private forumService: ForumService)
+  {this._Activatedroute.paramMap.subscribe(params => {
     this.id = Number(params.get('id'));
+  });
 
-  }); }
+    this.forumService.find(this.id).subscribe(data => {
+      this.forum = data;
+    });
+
+  }
 
   ngOnInit(): void {
     this.commentService.findAll(this.id).subscribe(data => {
@@ -32,6 +45,13 @@ export class CommentComponent implements OnInit {
     });
   }
   onSubmit() {
+    this.myDate=new Date();
+    let ChangedFormat = this.pipe.transform(this.myDate, 'YYYY-dd-MM');
+
+    if (ChangedFormat != null) {
+      this.comment.date = ChangedFormat;
+    }
+    this.comment.userid=this.userid;
     this.commentService.save(this.comment,this.id).subscribe(result => this.ngOnInit());
   }
   deleteComment(id:number){

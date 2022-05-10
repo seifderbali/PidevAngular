@@ -17,14 +17,17 @@
   <!-- Core Stylesheet -->
 
   <!-- Responsive CSS -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
-<div class = "text-center">
 
-  <h1>List of Offers</h1>
+<div style = "position:relative; left:300px; top:100px">
+  <div id="htmlData">
 
+  <h3>{{ this.collaboration.nom }} </h3>
+  <h3>{{ this.collaboration.mail }} </h3>
+  <h3>{{ this.collaboration.date }} </h3>
 
-</div>
 
 
 <div class="card my-5">
@@ -32,24 +35,26 @@
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Contenu</th>
-        <th scope="col">Date</th>
-        <th scope="col">UserID</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Description</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Phone </th>
+
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let v of offres">
-        <td>{{ v.id }}</td>
         <td>{{ v.nom }}</td>
         <td>{{ v.description }}</td>
         <td>{{ v.startDate }}</td>
-        <td>{{ v.endtDate }}</td>
+        <td>{{ v.endDate }}</td>
         <td>{{ v.phone }}</td>
 
 
-        <td><button (click)="deleteOffre(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
-        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
+
+        <td><button [disabled]="v.userid != this.userid && this.userrole=='u'" (click)="deleteOffre(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
+        <td><button [disabled]="v.userid != this.userid" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
 
       </tr>
       </tbody>
@@ -59,10 +64,17 @@
   </div>
 
 </div>
+  </div>
 
-<td><button (click)="avOffre()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModala">Available Offres</button></td>
+  <table border=0 width=140%>
+    <tr>
 
-<div class = "text-center">
+      <td><button (click)="avOffre()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModala">Available Offres</button></td>
+      <td><button class="btn btn-primary" (click)="openPDF()">Download PDF</button></td>
+    </tr>
+
+  </table>
+  <div class = "text-center">
   <h1>Add New Offre</h1>
 </div>
 
@@ -76,7 +88,7 @@
                required #name="ngModel">
       </div>
       <div class="form-group">
-        <label for="description">Date</label>
+        <label for="description">Description</label>
         <input type="text" [(ngModel)]="offre.description"
                class="form-control"
                id="description"
@@ -94,8 +106,8 @@
                required #email="ngModel">
       </div>
       <div class="form-group">
-        <label for="datee">Date</label>
-        <input type="date" [(ngModel)]="offre.endtDate"
+        <label for="datee">End Date</label>
+        <input type="date" [(ngModel)]="offre.endDate"
                class="form-control"
                id="datee"
                name="datee"
@@ -103,7 +115,7 @@
                required #email="ngModel">
       </div>
       <div class="form-group">
-        <label for="phone">UserID</label>
+        <label for="phone">Phone Number</label>
         <input type="text" [(ngModel)]="offre.phone"
                class="form-control"
                id="phone"
@@ -111,6 +123,7 @@
                placeholder="Entrer phone"
                required #email="ngModel">
       </div>
+
 
       <button [routerLink]="['/offre',this.id]" type="submit" [disabled]="!voyageForm.form.valid"
               class="btn btn-info">Submit</button>
@@ -155,7 +168,7 @@
           </div>
           <div class="form-group">
             <label for="dateeu">Date</label>
-            <input type="date" [(ngModel)]="offre.endtDate"
+            <input type="date" [(ngModel)]="offre.endDate"
                    class="form-control"
                    id="dateeu"
                    name="datee"
@@ -198,4 +211,6 @@
     </div>
   </div>
 </div>
+</div>
+
 

@@ -25,7 +25,8 @@ export class OffreService {
 
   }
   available(id:number){
-    return this.http.get<String>(this.baseUrl+"/available/"+id);
+    return this.http.get(this.baseUrl+"/available/"+id, {responseType: 'text'});
+
 
   }
 }

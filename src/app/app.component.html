@@ -1,5 +1,13 @@
-<app-nav-bar></app-nav-bar>
 
 
+<div *ngIf="this.userrole == 'a'; else elseBlock">
+  <app-main-header></app-main-header>
+  <app-main-sidebar></app-main-sidebar>
+  <router-outlet></router-outlet>
+  <app-main-footer></app-main-footer>
 
-<router-outlet></router-outlet>
+</div>
+<ng-template #elseBlock>
+  <app-user-navbar></app-user-navbar>
+  <router-outlet></router-outlet>
+</ng-template>

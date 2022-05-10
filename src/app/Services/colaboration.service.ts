@@ -22,4 +22,8 @@ export class ColaborationService {
   }
   updateCollaboration(collaboration:Collaboration){
     return this.http.put<Collaboration>(this.baseUrl+"/updatecollaboration", collaboration);
-  }}
+  }
+  public find(id:number): Observable<Collaboration> {
+    return this.http.get<Collaboration>(this.baseUrl+"/find/"+id);
+  }
+}

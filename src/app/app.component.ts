@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Pidev_crud';
+  userid:number=1;
+  userrole:string="a";
 }

@@ -3,6 +3,8 @@ export class Offre {
   nom!: string;
   description!: string;
   startDate!: string;
-  endtDate!: string;
+  endDate!: string;
   phone!: number;
+  userid!: number;
+
 }

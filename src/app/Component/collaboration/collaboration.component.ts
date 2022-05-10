@@ -3,6 +3,7 @@ import {ColaborationService} from "../../Services/colaboration.service";
 import {OffreService} from "../../Services/offre.service";
 import {Collaboration} from "../../Enteties/collaboration";
 import {Forum} from "../../Enteties/forum";
+import {DatePipe} from "@angular/common";
 
 
 @Component({
@@ -14,7 +15,9 @@ export class CollaborationComponent implements OnInit {
   collaboration: Collaboration = new Collaboration;
   collaborations: Collaboration[]=[];
   userid: number=1;
-
+  userrole:string="a";
+  myDate = new Date();
+  pipe = new DatePipe('en-IST');
   constructor(private collaborationService: ColaborationService,private offreService: OffreService) { }
 
   ngOnInit(): void {
@@ -23,6 +26,13 @@ export class CollaborationComponent implements OnInit {
     });
   }
   onSubmit() {
+    this.myDate=new Date();
+    let ChangedFormat = this.pipe.transform(this.myDate, 'YYYY-dd-MM');
+
+    if (ChangedFormat != null) {
+      this.collaboration.date = ChangedFormat;
+    }
+    this.collaboration.userid=this.userid;
     this.collaborationService.save(this.collaboration).subscribe(result => this.ngOnInit());
   }
   deletecollab(id:number){

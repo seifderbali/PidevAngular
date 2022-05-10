@@ -17,11 +17,15 @@
   <!-- Core Stylesheet -->
 
   <!-- Responsive CSS -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
-<div class = "text-center">
+<div style = "position:relative; left:300px; top:100px">
 
-  <h1>List of Comments</h1>
+<div>
+  <h3>{{ this.forum.contenu }} </h3>
+
+  <h3>{{ this.forum.date }} </h3>
 
 
 </div>
@@ -32,23 +36,19 @@
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
         <th scope="col">Contenu</th>
         <th scope="col">Date</th>
-        <th scope="col">UserID</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let v of comments">
-        <td>{{ v.id }}</td>
         <td>{{ v.contenu }}</td>
         <td>{{ v.date }}</td>
-        <td>{{ v.userid }}</td>
 
         <td><button (click)="count(v.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" (click)="edit(v)">show</button></td>
 
-        <td><button (click)="deleteComment(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
-        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
+        <td><button  [disabled]="v.userid != this.userid && this.userrole=='u'"  (click)="deleteComment(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
+        <td><button  [disabled]="v.userid != this.userid"   çtype="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
 
       </tr>
       </tbody>
@@ -74,24 +74,8 @@
         <input type="text" [(ngModel)]="comment.contenu" class="form-control" id="contenuadd" name="contenuadd" placeholder="Entrer le contenu"
                required #name="ngModel">
       </div>
-      <div class="form-group">
-        <label for="Date">Date</label>
-        <input type="date" [(ngModel)]="comment.date"
-               class="form-control"
-               id="dateadd"
-               name="dateadd"
-               placeholder="Entrer le date "
-               required #email="ngModel">
-      </div>
-      <div class="form-group">
-        <label for="userid">UserID</label>
-        <input type="text" [(ngModel)]="comment.userid"
-               class="form-control"
-               id="useridadd"
-               name="useridadd"
-               placeholder="Entrer userid"
-               required #email="ngModel">
-      </div>
+
+
 
       <button type="submit" [disabled]="!voyageForm.form.valid"
               class="btn btn-info">Submit</button>
@@ -218,4 +202,5 @@
 </div>
 
 
+</div>
 

@@ -14,11 +14,21 @@
   <!-- Favicon -->
   <link rel="icon" href="../assets/img/core-img/favicon.ico">
 
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
   <!-- Core Stylesheet -->
 
   <!-- Responsive CSS -->
 
 </head>
+
+
+<div style = "position:relative; left:300px; top:100px">
+
+
 <div class = "text-center">
 
   <h1>List of Forums</h1>
@@ -36,20 +46,16 @@
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
         <th scope="col">Contenu</th>
         <th scope="col">Date</th>
-        <th scope="col">UserID</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let v of forums">
-        <td>{{ v.id }}</td>
         <td>{{ v.contenu }}</td>
         <td>{{ v.date }}</td>
-        <td>{{ v.userid }}</td>
-        <td><button (click)="deleteComment(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
-        <td><button routerLink="/forum" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
+        <td><button [disabled]="v.userid != this.userid  && this.userrole=='u'" (click)="deleteComment(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
+        <td><button [disabled]="v.userid != this.userid" routerLink="/forum" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(v)">Update</button></td>
         <td><button [routerLink]="['/comment',v.id]" type="button" class="btn btn-primary">Show</button></td>
         <td><button (click)="generateQR(v.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalg">Generatie QR</button></td>
 
@@ -78,24 +84,8 @@
         <input type="text" [(ngModel)]="forum.contenu" class="form-control" id="contenuadd" name="contenuadd" placeholder="Entrer le contenu"
                required #name="ngModel">
       </div>
-      <div class="form-group">
-        <label for="Date">Date</label>
-        <input type="date" [(ngModel)]="forum.date"
-               class="form-control"
-               id="dateadd"
-               name="dateadd"
-               placeholder="Entrer le date "
-               required #email="ngModel">
-      </div>
-      <div class="form-group">
-        <label for="userid">UserID</label>
-        <input type="text" [(ngModel)]="forum.userid"
-               class="form-control"
-               id="useridadd"
-               name="useridadd"
-               placeholder="Entrer userid"
-               required #email="ngModel">
-      </div>
+
+
 
       <button type="submit" [disabled]="!voyageForm.form.valid"
               class="btn btn-info">Submit</button>
@@ -155,7 +145,7 @@
         <div class = "text-center">
 
         <div class="modal-body">
-          <img src="../assets/images/QRCode{{ this.fid }}.jpeg" height="300" width="300">
+          <img src="assets/images/QRCode{{ this.fid }}.jpeg" height="300" width="300">
         </div>
         </div>
       </div>
@@ -168,7 +158,8 @@
 
 
 <!-- Modal2 -->
-<div class="modal fade" id="exampleModalv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelv" aria-hidden="true">
+
+  <div class="modal fade" id="exampleModalv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelv" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -179,24 +170,19 @@
       </div>
       <div class="modal-body">
         <form #updateForm2="ngForm">
+          <div class="form-group">
+            <h3>{{forum.date}}</h3>
+          </div>
+          <div class="form-group">
+            <h3>{{forum.contenu}}</h3>
+          </div>
 
-          <div class="form-group">
-            <h2>Contenus :</h2>
-            <p>{{forum.contenu}}</p>
-          </div>
-          <div class="form-group">
-            <h2>Date :</h2>
-            <p>{{forum.date}}</p>
-          </div>
-          <div class="form-group">
-            <h2>UserID :</h2>
-            <p>{{forum.userid}}</p>
-          </div>
+
+
 
 
         </form>
       </div>
-      <h2>Comments :</h2>
 
       <div class="card my-5">
         <div class="card-body">
@@ -229,5 +215,8 @@
 
 
     </div>
+
   </div>
+</div>
+
 </div>
