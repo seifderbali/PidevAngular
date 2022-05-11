@@ -21,14 +21,19 @@ export class ForumComponent implements OnInit {
   comments: Comment[]=[];
   myDate = new Date();
   pipe = new DatePipe('en-IST');
+  captcha:string="";
 
   constructor(private forumService: ForumService,private commentService: CommentService) {
 
   }
+  totallength:any;
+  page:number=1;
+
 
   ngOnInit(): void {
     this.forumService.findAll(this.userid).subscribe(data => {
       this.forums = data;
+      this.totallength = data.length;
     });
   }
   onSubmit() {
@@ -82,7 +87,9 @@ export class ForumComponent implements OnInit {
     });
 
   }
-
+  resolved(captchaResponse: string){
+    this.captcha =captchaResponse;
+  }
 
 }
 

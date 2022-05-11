@@ -40,7 +40,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let v of collaborations">
+      <tr *ngFor="let v of collaborations
+      | paginate:
+      {
+              itemsPerPage: 5,
+              currentPage: page,
+              totalItems:totallength
+             }">
+
         <td>{{ v.nom }}</td>
         <td>{{ v.mail }}</td>
         <td>{{ v.date }}</td>
@@ -54,16 +61,27 @@
       </tbody>
 
     </table>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
 
   </div>
 
 </div>
 
 
+
+  <div>
 <div class = "text-center">
   <h1>Add New Collaboration</h1>
 </div>
 
+  <div [hidden]="captcha">
+
+    <re-captcha (resolved)="resolved($event)" siteKey="6LdBAd8fAAAAAHeFqnAWENEN35ECKgAXFIUWW-cw"></re-captcha>
+    <p> Verification</p>
+
+  </div>
+
+  <div [hidden]="!captcha">
 
 <div class="card my-5">
   <div class="card-body">
@@ -90,6 +108,8 @@
     </form>
   </div>
 </div>
+  </div>
+  </div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -112,11 +132,6 @@
             <label for="maill">Mail :</label>
             <input type="text" #address [(ngModel)]="collaboration.mail" name="mail" id="maill"
                    class="form-control" placeholder="mail">
-          </div>
-          <div class="form-group">
-            <label for="datee">date :</label>
-            <input type="text" #name [(ngModel)]="collaboration.date" name="date" id="datee" class="form-control"
-                   placeholder="datee">
           </div>
 
 

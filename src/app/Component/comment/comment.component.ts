@@ -108,6 +108,7 @@ export class CommentComponent implements OnInit {
   viral() {
     return this.commentService.findviral(this.id).subscribe(data => {
       this.comment = data;
+      this.count(this.comment.id);
     });
 
   }
@@ -117,5 +118,8 @@ export class CommentComponent implements OnInit {
       this.comments = data;
     });
   }
+
+
+
 }
 

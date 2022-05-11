@@ -25,7 +25,7 @@
 <div>
   <h3>{{ this.forum.contenu }} </h3>
 
-  <h3>{{ this.forum.date }} </h3>
+  <h4>{{ this.forum.date }} </h4>
 
 
 </div>
@@ -100,16 +100,7 @@
             <input type="text" #address [(ngModel)]="comment.contenu" name="contenu" id="contenu"
                    class="form-control" placeholder="contenu">
           </div>
-          <div class="form-group">
-            <label for="date">date :</label>
-            <input type="text" #name [(ngModel)]="comment.date" name="date" id="date" class="form-control"
-                   placeholder="datee">
-          </div>
-          <div class="form-group">
-            <label for="userid">userid :</label>
-            <input type="text" #address [(ngModel)]="comment.userid" name="userid" id="userid"
-                   class="form-control" placeholder="userid">
-          </div>
+
 
           <div class="form-group">
             <input type="submit" value="Update" class="btn btn-primary w-100">
@@ -130,7 +121,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel2">Update Forum</h5>
+        <h5 class="modal-title" id="exampleModalLabel2">Comment</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -139,17 +130,12 @@
         <form #updateForm2="ngForm">
 
           <div class="form-group">
-            <h2>Contenus :</h2>
             <p>{{comment.contenu}}</p>
           </div>
           <div class="form-group">
-            <h2>Date :</h2>
             <p>{{comment.date}}</p>
           </div>
-          <div class="form-group">
-            <h2>UserID :</h2>
-            <p>{{comment.userid}}</p>
-          </div>
+
           <td><button (click)="addlike(1,comment.id)" type="button" class="fa fa-thumbs-up" >Like {{ this.getlike() }}</button></td>
           <td><button (click)="addlike(-1,comment.id)" type="button" class="fa fa-thumbs-down">Dislike {{ this.getdislike() }}</button></td>
 
@@ -169,7 +155,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title" id="exampleModalLabelv">Most Liked Comment</h1>
+        <h3 class="modal-title" id="exampleModalLabelv">Most Liked Comment</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -178,19 +164,14 @@
         <form #updateForm2="ngForm">
 
           <div class="form-group">
-            <h2>Contenus :</h2>
             <p>{{comment.contenu}}</p>
           </div>
           <div class="form-group">
-            <h2>Date :</h2>
             <p>{{comment.date}}</p>
           </div>
-          <div class="form-group">
-            <h2>UserID :</h2>
-            <p>{{comment.userid}}</p>
-          </div>
-          <td><button (click)="addlike(1,comment.id)" type="button" class="fa fa-thumbs-up" >Like {{ this.idl }}</button></td>
-          <td><button (click)="addlike(-1,comment.id)" type="button" class="fa fa-thumbs-down">Dislike {{ this.idd }}</button></td>
+
+          <td><button (click)="addlike(1,comment.id)" type="button" class="fa fa-thumbs-up" >Like {{ this.getlike() }}</button></td>
+          <td><button (click)="addlike(-1,comment.id)" type="button" class="fa fa-thumbs-down">Dislike {{ this.getdislike() }}</button></td>
 
 
 

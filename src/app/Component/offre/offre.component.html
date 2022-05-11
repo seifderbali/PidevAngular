@@ -25,8 +25,8 @@
   <div id="htmlData">
 
   <h3>{{ this.collaboration.nom }} </h3>
-  <h3>{{ this.collaboration.mail }} </h3>
-  <h3>{{ this.collaboration.date }} </h3>
+  <h4>{{ this.collaboration.mail }} </h4>
+  <h4>{{ this.collaboration.date }} </h4>
 
 
 
@@ -70,7 +70,7 @@
     <tr>
 
       <td><button (click)="avOffre()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModala">Available Offres</button></td>
-      <td><button class="btn btn-primary" (click)="openPDF()">Download PDF</button></td>
+      <td><button [disabled]=" this.userrole=='u'" class="btn btn-primary" (click)="openPDF()">Download PDF</button></td>
     </tr>
 
   </table>
@@ -149,7 +149,7 @@
                    class="form-control" placeholder="Name">
           </div>
           <div class="form-group">
-            <label for="descriptionu">Date</label>
+            <label for="descriptionu">Description</label>
             <input type="text" [(ngModel)]="offre.description"
                    class="form-control"
                    id="descriptionu"
@@ -167,7 +167,7 @@
                    required #email="ngModel">
           </div>
           <div class="form-group">
-            <label for="dateeu">Date</label>
+            <label for="dateeu">End Date</label>
             <input type="date" [(ngModel)]="offre.endDate"
                    class="form-control"
                    id="dateeu"
@@ -176,7 +176,7 @@
                    required #email="ngModel">
           </div>
           <div class="form-group">
-            <label for="phoneu">UserID</label>
+            <label for="phoneu">Phone</label>
             <input type="text" [(ngModel)]="offre.phone"
                    class="form-control"
                    id="phoneu"

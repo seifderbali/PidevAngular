@@ -8,7 +8,7 @@ import {OffreComponent} from "./Component/offre/offre.component";
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'forum', component: ForumComponent },
   { path: 'collaboration', component: CollaborationComponent },
   { path: 'offre/:id', component: OffreComponent },

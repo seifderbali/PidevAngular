@@ -51,7 +51,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let v of forums">
+      <tr *ngFor="let v of forums
+      | paginate:
+      {
+              itemsPerPage: 5,
+              currentPage: page,
+              totalItems:totallength
+             }">
         <td>{{ v.contenu }}</td>
         <td>{{ v.date }}</td>
         <td><button [disabled]="v.userid != this.userid  && this.userrole=='u'" (click)="deleteComment(v.id)" type="button" class="btn btn-primary">DELETE</button></td>
@@ -66,6 +72,7 @@
     </table>
 
   </div>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
 
 </div>
 
@@ -75,6 +82,15 @@
   <h1>Add New Forum</h1>
 </div>
 
+
+  <div [hidden]="captcha">
+
+    <re-captcha (resolved)="resolved($event)" siteKey="6LdBAd8fAAAAAHeFqnAWENEN35ECKgAXFIUWW-cw"></re-captcha>
+    <p> Verification</p>
+
+  </div>
+
+  <div [hidden]="!captcha">
 
 <div class="card my-5">
   <div class="card-body">
@@ -92,7 +108,7 @@
     </form>
   </div>
 </div>
-
+  </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -110,16 +126,8 @@
             <input type="text" #address [(ngModel)]="forum.contenu" name="contenu" id="contenu"
                    class="form-control" placeholder="contenu">
           </div>
-          <div class="form-group">
-            <label for="date">date :</label>
-            <input type="text" #name [(ngModel)]="forum.date" name="date" id="date" class="form-control"
-                   placeholder="datee">
-          </div>
-          <div class="form-group">
-            <label for="userid">userid :</label>
-            <input type="text" #address [(ngModel)]="forum.userid" name="userid" id="userid"
-                   class="form-control" placeholder="userid">
-          </div>
+
+
 
           <div class="form-group">
             <input type="submit" value="Update" class="btn btn-primary w-100">
@@ -131,6 +139,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!-- Modalg -->
@@ -163,7 +172,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title" id="exampleModalLabelv">Most Viral Forum</h1>
+        <h3 class="modal-title" id="exampleModalLabelv">Most Viral Forum</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -171,11 +180,12 @@
       <div class="modal-body">
         <form #updateForm2="ngForm">
           <div class="form-group">
-            <h3>{{forum.date}}</h3>
+            <div class="form-group">
+              <h4>{{forum.contenu}}</h4>
+            </div>
+            <h5>{{forum.date}}</h5>
           </div>
-          <div class="form-group">
-            <h3>{{forum.contenu}}</h3>
-          </div>
+
 
 
 

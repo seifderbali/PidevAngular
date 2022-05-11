@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ColaborationService} from "../../Services/colaboration.service";
 import {OffreService} from "../../Services/offre.service";
 import {Collaboration} from "../../Enteties/collaboration";
-import {Forum} from "../../Enteties/forum";
 import {DatePipe} from "@angular/common";
 
 
@@ -19,10 +18,15 @@ export class CollaborationComponent implements OnInit {
   myDate = new Date();
   pipe = new DatePipe('en-IST');
   constructor(private collaborationService: ColaborationService,private offreService: OffreService) { }
+  totallength:any;
+  page:number=1;
+
+  captcha:string="";
 
   ngOnInit(): void {
     this.collaborationService.findAll().subscribe(data => {
       this.collaborations = data;
+      this.totallength = data.length;
     });
   }
   onSubmit() {
@@ -52,5 +56,7 @@ export class CollaborationComponent implements OnInit {
       }
     );
   }
-
+resolved(captchaResponse: string){
+    this.captcha =captchaResponse;
+}
 }

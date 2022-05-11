@@ -18,6 +18,9 @@ import { ControlSidebarComponent } from './control-sidebar/control-sidebar.compo
 import { ControlWrapperComponent } from './control-wrapper/control-wrapper.component';
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { RecaptchaModule } from 'ng-recaptcha';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +44,9 @@ import { UserNavbarComponent } from './user-navbar/user-navbar.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule,
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
